@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h1>Pagamentos</h1>
+    </div>
+
+    <div class="container">
+        <a class="btn btn-dark" href="{% url 'cadastro_pagamentos' %}" role="button">Inserir Pagamento</a>
+    </div>
+
+    <div class="container">
+        <table class="table table-hover" id="tabela-listar">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Aluno</th>
+                    <th scope="col">Válido de</th>
+                    <th scope="col">Válido até</th>
+                    <th scope="col">Data pagamento</th>
+                    <th scope="col">Valor pago</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Apagar</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for pagamento in object_list %}
+                <tr>
+                    <td scope="row">{{ pagamento.id }}</td>
+                    <td scope="row">{{ pagamento.aluno }}</td>
+                    <td scope="row">{{ pagamento.valido_de }}</td>
+                    <td scope="row">{{ pagamento.valido_ate }}</td>
+                    <td scope="row">{{ pagamento.data_pagto }}</td>
+                    <td scope="row">{{ pagamento.valor_pago }}</td>
+                    <td scope="row"><a class="btn btn-warning" href="{% url 'atualiza_pagamentos' pagamento.id %}" role="button">Editar</a></td>
+                    <td scope="row"><a class="btn btn-danger" href="{% url 'deleta_pagamentos' pagamento.id %}" role="button">Apagar</a></td>
+                </tr>
+                {% endfor %}
+
+                <hr>{{ object.soma }}</hr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function(){
+
+            $('#tabela-listar').DataTable({
+                responsive: true,
+                // "bSort": false,
+                "aaSorting": [],
+                "pageLength": 50,
+                "language": {
+                    "decimal": "",
+                    "emptyTable": "Sem dados disponíveis",
+                    "info": "Mostrando de _START_ até _END_ de _TOTAL_ registos",
+                    "infoEmpty": "Mostrando de 0 até 0 de 0 registos",
+                    "infoFiltered": "(filtrado de _MAX_ registos no total)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ registos",
+                    "loadingRecords": "A carregar dados...",
+                    "processing": "A processar...",
+                    "search": "Procurar:",
+                    "zeroRecords": "Não foram encontrados resultados",
+                    "paginate": {
+                        "first": "Primeiro",
+                        "last": "Último",
+                        "next": "Seguinte",
+                        "previous": "Anterior"
+                    },
+                    "aria": {
+                        "sortAscending": ": ordem crescente",
+                        "sortDescending": ": ordem decrescente"
+                    }
+                }
+            });
+
+        });
+    </script>
+
+{% endblock %}

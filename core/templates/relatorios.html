@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h1>Relatórios</h1>
+    </div>
+
+    <div class="container">
+        <h3>Consulta de pagamentos por período </h3>
+    </div>
+
+    <div class="container">
+        <form action="?" method="GET">
+            <label>Data inicial</label>
+            <input type="date" name="start_date">
+            <label>Data final</label>
+            <input type="date" name="end_date">
+
+
+            <button type="submit" class="btn btn-primary">Consultar</button>
+
+            <a href="{% url 'relatorios' %}" class="btn btn-light">Limpar</a>
+        </form>
+
+    <ul>
+        {% if request.GET.start_date %}
+
+            <div class="container">
+                <table class="table table-hover" id="tabela-listar">
+                    <thead>
+                        <tr>
+                            <th scope="col">Aluno</th>
+                            <th scope="col">Data pagamento</th>
+                            <th scope="col">Valor pago</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for pagamento in object_list %}
+                        <tr>
+                            <td scope="row">{{ pagamento.aluno }}</td>
+                            <td scope="row">{{ pagamento.data_pagto }}</td>
+                            <td scope="row">{{ pagamento.valor_pago }}</td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+                O valor total de pagamentos do período entre {{ start_date }} e {{ end_date }} é de R$ {{ soma }}.
+            </div>
+        {% else %}
+        <div class="container">
+            <p>Insira as datas de ínício e fim do período desejado para fazer a consulta</p>
+        </div>
+        {% endif%}
+
+
+    </ul>
+
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+
+{% endblock %}

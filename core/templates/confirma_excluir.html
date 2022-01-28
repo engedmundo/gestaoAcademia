@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap %}
+
+{% block content %}
+    <div class="container">
+        <h1>Excluir registros</h1>
+    </div>
+
+    <div class="container">
+        <p> Deseja excluir o registro: <b>{{ object }}</b> ?</p>
+        <form method="post" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+            {{ form|bootstrap }}
+            <button type="submit" class="btn btn-danger">Excluir</button>
+
+        </form>
+    </div>
+
+{% endblock %}

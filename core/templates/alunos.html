@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h1>Consulta de alunos</h1>
+    </div>
+
+    <div class="container">
+        <form action="?" method="GET">
+            <input type="text" name="nome" id="" value="" class="p-1 border" autocomplete="off" placeholder="Nome do aluno">
+
+            <button type="submit" class="btn btn-primary">Buscar</button>
+
+            <a href="{% url 'alunos' %}" class="btn btn-light">Limpar</a>
+        </form>
+    </div>
+
+    <div class="container">
+        <a class="btn btn-dark" href="{% url 'cadastro_alunos' %}" role="button">Inserir Aluno</a>
+    </div>
+
+    <div class="container">
+        <div class="table-responsive">
+        <table class="table table-hover" id="tabela-listar">
+            <thead>
+                <tr>
+                    <th scope="col">Aluno</th>
+                    <th scope="col">Plano</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Apagar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for aluno in object_list %}
+
+                <tr>
+                    <td scope="row">{{ aluno.nome }}</td>
+                    <td scope="row">{{ aluno.idplano }}</td>
+                    <td scope="row">{{ aluno.telefone }}</td>
+                    <td scope="row"><a class="btn btn-warning" href="{% url 'atualiza_alunos' aluno.id %}" role="button">Editar</a></td>
+                    <td scope="row"><a class="btn btn-danger" href="{% url 'deleta_alunos' aluno.id %}" role="button">Apagar</a></td>
+                </tr>
+
+                {% empty %}
+                <tr>
+                    <td colspan="6">Nenhum registro encontrado</td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+
+    <ul class="pagination justify-content-center">
+
+        {% if page_obj.has_previous %}
+
+            {% if request.GET.nome %}
+                <li class="page-item"><a class="page-link" href="?page=1&nome={{request.GET.nome}}">&laquo; Primeira</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}&nome={{request.GET.nome}}"> Anterior</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primeira</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}"> Anterior</a></li>
+            {% endif %}
+
+        {% endif %}
+
+        <li class="page-item"><span class="page-link">Página: {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</span></li>
+
+        {% if page_obj.has_next %}
+            {% if request.GET.nome %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}&nome={{request.GET.nome}}">Próxima</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.paginator.num_pages}}&nome={{request.GET.nome}}">Última &raquo;</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Próxima</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{page_obj.paginator.num_pages}}">Última &raquo;</a></li>
+            {% endif %}
+        {% endif %}
+
+    </ul>
+
+
+{% endblock %}
+
+
