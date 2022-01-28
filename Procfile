@@ -1,0 +1,1 @@
+web: gunicorn gestaoAcademia.wsgi --log-file -
