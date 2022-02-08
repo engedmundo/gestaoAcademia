@@ -4,15 +4,25 @@
     <!-- ====== Início da seção Capa -->
     {% include 'capa.html' %}
     {% if user.is_anonymous %}
-        <div class="container">
-            Olá usuário! Inicie uma sessão para acessar o sistema!
-            <a class="btn btn-primary" href="{% url 'login' %}">Entrar</a>
-        </div>
+        <blockquote class="blockquote text-center">
+            <div class="container ">
+                <p>Olá usuário, você não está logado. Inicie uma sessão para acessar o sistema.</p>
+                <br>
+                <a class="btn btn-primary" href="{% url 'login' %}">Entrar</a>
+            </div>
+        </blockquote>
+
     {% else %}
-        <div class="container">
-            Seja bem-vindo(a) {{ user.get_full_name }}!
-            <a class="btn btn-primary" href="{% url 'logout' %}">Sair</a>
-        </div>
+        <blockquote class="blockquote text-center">
+            <div class="container ">
+                <div class="container">
+                    <p>Seja bem-vindo(a) {{ request.user.username }}!</p>
+                    <br>
+                    <a class="btn btn-primary" href="{% url 'logout' %}">Sair</a>
+                </div>
+        </blockquote>
+
+
     {% endif %}
     <!-- ====== Fim da seção Capa -->
 
