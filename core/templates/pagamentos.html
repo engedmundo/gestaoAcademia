@@ -6,6 +6,15 @@
         <h1>Pagamentos</h1>
     </div>
 
+    <!----  Mensagem de sucesso --------->
+    {% if messages %}
+         {% for message in messages %}
+             <div class="text-center alert alert-{{ message.tags }}">
+                 {{ message|safe }}
+             </div>
+         {% endfor %}
+    {% endif %}
+
     <div class="container">
         <a class="btn btn-dark" href="{% url 'cadastro_pagamentos' %}" role="button">Inserir Pagamento</a>
     </div>

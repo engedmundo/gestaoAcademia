@@ -5,6 +5,14 @@
     <div class="container">
         <h1>Consulta de alunos</h1>
     </div>
+    <!----  Mensagem de sucesso --------->
+    {% if messages %}
+         {% for message in messages %}
+             <div class="text-center alert alert-{{ message.tags }}">
+                 {{ message|safe }}
+             </div>
+         {% endfor %}
+    {% endif %}
 
     <div class="container">
         <form action="?" method="GET">

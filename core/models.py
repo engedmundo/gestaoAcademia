@@ -19,7 +19,7 @@ class Aluno(models.Model):
     cpf = models.CharField('CPF', null=True, blank=True, max_length=11)
     endereco = models.CharField('Endereço', null=True, blank=True, max_length=50)
     telefone = models.CharField('Telefone', null=True, blank=True, max_length=15)
-    idplano = models.ForeignKey('core.Plano', verbose_name='Plano', on_delete=models.CASCADE)
+    idplano = models.ForeignKey('core.Plano', verbose_name='Plano', on_delete=models.PROTECT)
 
     class Meta:
         verbose_name = 'Aluno'

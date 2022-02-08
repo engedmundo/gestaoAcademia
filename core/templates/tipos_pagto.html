@@ -6,6 +6,15 @@
         <h1>Consulta de tipos de pagamento</h1>
     </div>
 
+    <!----  Mensagem de sucesso --------->
+    {% if messages %}
+         {% for message in messages %}
+             <div class="text-center alert alert-{{ message.tags }}">
+                 {{ message|safe }}
+             </div>
+         {% endfor %}
+    {% endif %}
+
     <div class="container">
         <table class="table table-hover">
             <thead>

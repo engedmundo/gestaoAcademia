@@ -1,8 +1,7 @@
 from django.views.generic import ListView, TemplateView, CreateView, UpdateView, DeleteView
 from .models import Aluno, Pagamento, Plano, TipoPagto
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import AlunoModelForm, PlanoModelForm, PagamentoModelForm, TipoPagtoModelForm
-from django.contrib import messages
+from django.shortcuts import render, redirect
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -84,99 +83,111 @@ def relatorio_list(request):
 
 
 # =========== Cadastros ===================
-class AlunoCreate(LoginRequiredMixin, CreateView):
+class AlunoCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = reverse_lazy('index')
     model = Aluno
     fields = ['nome', 'cpf', 'endereco', 'telefone', 'idplano']
     template_name = 'cadastro_alunos.html'
     success_url = reverse_lazy('alunos')
+    success_message = "Aluno cadastrado com sucesso!"
 
 
-class PagamentoCreate(LoginRequiredMixin, CreateView):
+class PagamentoCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = reverse_lazy('index')
     model = Pagamento
     fields = ['valido_de', 'valido_ate', 'data_pagto', 'valor_pago', 'tipo_pagto', 'aluno']
     template_name = 'cadastro_pagamentos.html'
     success_url = reverse_lazy('pagamentos')
+    success_message = "Pagamento cadastrado com sucesso!"
 
 
-class PlanoCreate(LoginRequiredMixin, CreateView):
+class PlanoCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = reverse_lazy('index')
     model = Plano
     fields = ['descricao', 'valor']
     template_name = 'cadastro_planos.html'
     success_url = reverse_lazy('planos')
+    success_message = "Plano cadastrado com sucesso!"
 
 
-class TipopagtoCreate(LoginRequiredMixin, CreateView):
+class TipopagtoCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     login_url = reverse_lazy('index')
     model = TipoPagto
     fields = ['descricao']
     template_name = 'cadastro_tipopagto.html'
     success_url = reverse_lazy('tipos_pagto')
+    success_message = "Tipo de pagamento cadastrado com sucesso!"
 
 
 # ============== Atualizações ==================
 
-class AlunoUpdate(LoginRequiredMixin, UpdateView):
+class AlunoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy('index')
     model = Aluno
     fields = ['nome', 'cpf', 'endereco', 'telefone', 'idplano']
     template_name = 'cadastro_alunos.html'
     success_url = reverse_lazy('alunos')
+    success_message = "Cadastro atualizado com sucesso!"
 
 
-class PagamentoUpdate(LoginRequiredMixin, UpdateView):
+class PagamentoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy('index')
     model = Pagamento
     fields = ['valido_de', 'valido_ate', 'data_pagto', 'valor_pago', 'tipo_pagto', 'aluno']
     template_name = 'cadastro_pagamentos.html'
     success_url = reverse_lazy('pagamentos')
+    success_message = "Cadastro atualizado com sucesso!"
 
 
-class PlanoUpdate(LoginRequiredMixin, UpdateView):
+class PlanoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy('index')
     model = Plano
     fields = ['descricao', 'valor']
     template_name = 'cadastro_planos.html'
     success_url = reverse_lazy('planos')
+    success_message = "Cadastro atualizado com sucesso!"
 
 
-class TipopagtoUpdate(LoginRequiredMixin, UpdateView):
+class TipopagtoUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     login_url = reverse_lazy('index')
     model = TipoPagto
     fields = ['descricao']
     template_name = 'cadastro_tipopagto.html'
     success_url = reverse_lazy('tipos_pagto')
+    success_message = "Cadastro atualizado com sucesso!"
 
 
 # ============= DELETE ==================
 
-class AlunoDelete(LoginRequiredMixin, DeleteView):
+class AlunoDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     login_url = reverse_lazy('index')
     model = Aluno
     template_name = 'confirma_excluir.html'
     success_url = reverse_lazy('alunos')
+    success_message = "Registro excluído com sucesso!"
 
 
-class PagamentoDelete(LoginRequiredMixin, DeleteView):
+class PagamentoDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     login_url = reverse_lazy('index')
     model = Pagamento
     fields = ['valido_de', 'valido_ate', 'data_pagto', 'valor_pago', 'tipo_pagto', 'aluno']
     template_name = 'confirma_excluir.html'
     success_url = reverse_lazy('pagamentos')
+    success_message = "Registro excluído com sucesso!"
 
 
-class PlanoDelete(LoginRequiredMixin, DeleteView):
+class PlanoDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     login_url = reverse_lazy('index')
     model = Plano
     fields = ['descricao', 'valor']
     template_name = 'confirma_excluir.html'
     success_url = reverse_lazy('planos')
+    success_message = "Registro excluído com sucesso!"
 
 
-class TipopagtoDelete(LoginRequiredMixin, DeleteView):
+class TipopagtoDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     login_url = reverse_lazy('index')
     model = TipoPagto
     template_name = 'confirma_excluir.html'
     success_url = reverse_lazy('tipos_pagto')
+    success_message = "Registro excluído com sucesso!"
