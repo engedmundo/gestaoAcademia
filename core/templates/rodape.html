@@ -1,9 +1,17 @@
 {% load static %}
 
-  <footer>
+<footer>
     <div class="bg-light">
-      <div class="container">
-        <span>Versão 0.1</span>
-      </div>
+        <div class="container">
+            {% if user.is_anonymous %}
+                <span>Você não está logado no sistema</span>
+                <br>
+                <span>ealsistemas. Versão 1.0</span>
+            {% else %}
+                <span>Usuário: {{ request.user.username }} </span>
+                <br>
+                <span>ealsistemas. Versão 1.0. <a href="{% url 'logout' %}" style="text-decoration:none">Sair</a></span>
+            {% endif %}
+        </div>
     </div>
-  </footer>
+</footer>
