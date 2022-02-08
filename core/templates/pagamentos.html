@@ -33,7 +33,7 @@
                     <td scope="row">{{ pagamento.valido_de }}</td>
                     <td scope="row">{{ pagamento.valido_ate }}</td>
                     <td scope="row">{{ pagamento.data_pagto }}</td>
-                    <td scope="row">{{ pagamento.valor_pago }}</td>
+                    <td scope="row">R$ {{ pagamento.valor_pago }}</td>
                     <td scope="row"><a class="btn btn-warning" href="{% url 'atualiza_pagamentos' pagamento.id %}" role="button">Editar</a></td>
                     <td scope="row"><a class="btn btn-danger" href="{% url 'deleta_pagamentos' pagamento.id %}" role="button">Apagar</a></td>
                 </tr>

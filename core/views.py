@@ -8,6 +8,7 @@ from django.urls import reverse_lazy
 from django.db.models.aggregates import Sum
 
 #=========== Listas ==================
+
 class IndexView(TemplateView):
     template_name = 'index.html'
 
@@ -79,6 +80,7 @@ class AlunoCreate(CreateView):
     success_url = reverse_lazy('alunos')
 
 
+
 class PagamentoCreate(CreateView):
     model = Pagamento
     fields = ['valido_de', 'valido_ate', 'data_pagto', 'valor_pago', 'tipo_pagto', 'aluno']
@@ -86,11 +88,13 @@ class PagamentoCreate(CreateView):
     success_url = reverse_lazy('pagamentos')
 
 
+
 class PlanoCreate(CreateView):
      model = Plano
      fields = ['descricao', 'valor']
      template_name = 'cadastro_planos.html'
      success_url = reverse_lazy('planos')
+
 
 
 class TipopagtoCreate(CreateView):
@@ -101,17 +105,21 @@ class TipopagtoCreate(CreateView):
 
 
 # ============== Atualizações ==================
+
 class AlunoUpdate(UpdateView):
     model = Aluno
     fields = ['nome','cpf', 'endereco', 'telefone', 'idplano']
     template_name = 'cadastro_alunos.html'
     success_url = reverse_lazy('alunos')
 
+
+
 class PagamentoUpdate(UpdateView):
     model = Pagamento
     fields = ['valido_de', 'valido_ate', 'data_pagto', 'valor_pago', 'tipo_pagto', 'aluno']
     template_name = 'cadastro_pagamentos.html'
     success_url = reverse_lazy('pagamentos')
+
 
 
 class PlanoUpdate(UpdateView):
@@ -121,6 +129,7 @@ class PlanoUpdate(UpdateView):
      success_url = reverse_lazy('planos')
 
 
+
 class TipopagtoUpdate(UpdateView):
     model = TipoPagto
     fields = ['descricao']
@@ -128,7 +137,9 @@ class TipopagtoUpdate(UpdateView):
     success_url = reverse_lazy('tipos_pagto')
 
 
+
 # ============= DELETE ==================
+
 class AlunoDelete(DeleteView):
     model = Aluno
     template_name = 'confirma_excluir.html'
@@ -142,11 +153,13 @@ class PagamentoDelete(DeleteView):
     success_url = reverse_lazy('pagamentos')
 
 
+
 class PlanoDelete(DeleteView):
      model = Plano
      fields = ['descricao', 'valor']
      template_name = 'confirma_excluir.html'
      success_url = reverse_lazy('planos')
+
 
 
 class TipopagtoDelete(DeleteView):

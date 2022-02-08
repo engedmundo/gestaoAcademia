@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Informe seus dados de acesso ao sistema</h1>
+    <form class="form-signin" method="post" autocomplete="off">
+        {% csrf_token %}
+        <label for="username" class="sr-only">Usuário</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Informe seu usuário" required autofocus>
+
+        <label for="password" class="sr-only">Senha</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Informe sua senha" required autofocus>
+
+        <button class="btn btn-primary btn-block" type="submit">Acessar</button>
+        <p class="mt-5 mb-3 text-muted">&copy; {% now 'Y' %}</p>
+    </form>
+{% endblock %}
