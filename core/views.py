@@ -59,7 +59,6 @@ def relatorio_list(request):
     if str(request.user) != 'AnonymousUser':
         template_name = 'relatorios.html'
         object_list = Pagamento.objects.all()
-        print(request.user)
 
         start_date = request.GET.get('start_date')
         end_date = request.GET.get('end_date')
